@@ -96,7 +96,7 @@ export default class App extends Component {
         if (this.state.password == '' || this.state.password.length < 8) {
             bad = true;
         }
-        if (this.state.password != this.state.password2 && this.state.loginState == 2)
+        if ((this.state.password != this.state.password2) && this.state.loginState == 2)
             misMatch = true;
         
         if (bad) {
@@ -183,16 +183,16 @@ export default class App extends Component {
     // Function called when login button pressed
     onLogin() {
         
-        this.resetInvalids();
-        
         const { loginState, email, firstName, lastName, password, password2 } = this.state;
         
         var failed = true;
         
+        this.resetInvalids();
+        
         if (this.validateEmail() && this.validatePassword()) {
             failed = false;
         }
-        
+        this.validatePassword();
         if (failed)
             return;
         
@@ -220,9 +220,9 @@ export default class App extends Component {
     // Function called when register button pressed
     onRegister() {
         
-        this.resetInvalids();
-        
         const { loginState, email, nameFirst, nameLast, password, password2 } = this.state;
+        
+        this.resetInvalids();
         
         var failed = false;
         
